@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- bootstrap 4.6.0 -->
-    <<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
@@ -24,7 +24,7 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Products</a>
+        <a class="nav-link" href="#">Menu</a>
       </li>
 
       <li class="nav-item">
@@ -32,29 +32,39 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">Blog</a>
+        <a class="nav-link" href="#">BlogPosts</a>
       </li>
       
     </ul>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-end">
+    @guest
+    <ul class="navbar-nav justify-content-end">
       
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="{{route('login')}}">Login</a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" href="{{route('register')}}">Register</a>
       </li>
+      </ul>
+      @endguest
 
+      @auth
+      <ul class="navbar-nav justify-content-end">
       <li class="nav-item">
-        <a class="nav-link" href="#">RayRay</a>
+        <a class="nav-link" href="#">{{auth()->user()->name}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+
+        <form action="{{route('logout')}}" method="post">
+
+            @csrf
+          <button type="submit">Logout</button>
+          </form>
       </li>
       
     </ul>
-    
+    @endauth
   </div>
 </nav>
 
