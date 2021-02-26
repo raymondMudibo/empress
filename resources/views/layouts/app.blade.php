@@ -8,7 +8,12 @@
 
         <!-- bootstrap 4.6.0 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    
+       <!-- font awesome link -->
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+       <!-- CKEditor5 script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
     
@@ -24,18 +29,27 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Menu</a>
+        <a class="nav-link" href="{{route('menu')}}">Menu</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="{{route('about')}}">About Us</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">BlogPosts</a>
+        <a class="nav-link" href="{{route('blog')}}">BlogPosts</a>
       </li>
+
+      @auth 
+
+       <li class="nav-item">
+          <a class="nav-link" href="{{route('posts')}}">Write a blog post</a>
+       </li>
+
+    @endauth
       
     </ul>
+   
     @guest
     <ul class="navbar-nav justify-content-end">
       
@@ -50,6 +64,7 @@
       @endguest
 
       @auth
+
       <ul class="navbar-nav justify-content-end">
       <li class="nav-item">
         <a class="nav-link" href="#">{{auth()->user()->name}}</a>
@@ -107,9 +122,15 @@
 
 
 
+<!-- CKEditor5 script alternatively you can have a javascript separate file and link it with this code under $('document').ready(function(){}) JQuery -->
 
-
-
+  <script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+ </script>
 
 
 
